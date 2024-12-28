@@ -8,11 +8,12 @@ import SMSModal from "../sms-modal/SMSModal.jsx";
 const Layout = () => {
   const [showModal, setShowModal] = useState('');
   const [otp, setOtp] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
   // login | sms | password
   const signIn = async () => {
     setShowModal('sms')
     const phoneData = {
-      phone_number: "+996707422917"
+      phone_number: phoneNumber
     }
     const response = await fetch("https://my-test-product.up.railway.app/api-auth/register/", {
       method: "POST",
@@ -32,7 +33,10 @@ const Layout = () => {
       <div>
         <Header setShowModal={setShowModal}/>
         <Outlet/>
-        {showModal === 'login' ? <LoginModal signIn={signIn} setShowModal={setShowModal}/> : null }
+        {showModal === 'login' ? <LoginModal
+            signIn={signIn}
+            setPhoneNumber={setPhoneNumber}
+            setShowModal={setShowModal}/> : null }
         {showModal === 'sms' ? <SMSModal otp={otp} setShowModal={setShowModal}/> : null }
         {/*{showModal === 'password' ? <PasswordModal setShowModal={setShowModal}/> : null }*/}
         <Footer/>

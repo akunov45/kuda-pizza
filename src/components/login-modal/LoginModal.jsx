@@ -1,7 +1,7 @@
 import {MdClose} from "react-icons/md";
 
 const LoginModal = (props) => {
-  const {setShowModal, signIn} = props;
+  const {setShowModal, signIn, setPhoneNumber} = props;
 
   return (
       <div
@@ -19,8 +19,15 @@ const LoginModal = (props) => {
               использовать бонусы
             </p>
             <label className={"block mb-[8px] text-[#A5A5A5] text-left"} htmlFor="tel"> Номер телефона </label>
-            <input className={"w-[320px] focus:outline-0 border border-[#F0F0F0] py-[13px] px-[16px] rounded-[6px]"}
-                   type="tel" id={"tel"} placeholder={"+7"}/>
+            <input
+                onChange={(e) => {
+                  if (e.target.value.trim().length === 13) {
+                    // "+996500134553"
+                    setPhoneNumber(e.target.value)
+                  }
+                }}
+                className={"w-[320px] focus:outline-0 border border-[#F0F0F0] py-[13px] px-[16px] rounded-[6px]"}
+                type="tel" id={"tel"} placeholder={"+996500123456"}/>
             <button
                 onClick={signIn}
                 className={"w-full text-white mt-[16px] mb-[12px] py-[13px] bg-[#FF7010] rounded-[16px] "}>

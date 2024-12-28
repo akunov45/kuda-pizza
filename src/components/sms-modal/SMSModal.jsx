@@ -22,7 +22,7 @@ const SMSModal = (props) => {
         }
         if (prevTimer === 55) {
           // const randomCode = Math.floor(1000 + Math.random() * 9000);
-          alert(otp2)
+          // alert(otp2)
           console.log(otp2)
         }
         return prevTimer - 1;
@@ -32,6 +32,18 @@ const SMSModal = (props) => {
 
     return () => clearInterval(countdown);
   }, [start]);
+
+  useEffect(() => {
+    if(otp2.length > 0){
+      const otpKode  = otp2?.split(''); // "2345" -> [2,3,4,5]
+      setOtp({
+        value1: otpKode[0],
+        value2: otpKode[1],
+        value3: otpKode[2],
+        value4: otpKode[3]
+      })
+    }
+  }, [otp2])
 
   const onChange = (e) => {
     const {name, value} = e.target;
